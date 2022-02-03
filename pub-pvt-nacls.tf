@@ -92,6 +92,14 @@ resource "aws_network_acl" "pvt_nacl" {
     from_port  = 0
     to_port    = 0
   }
+  egress {
+    protocol   = "-1"
+    rule_no    = 100
+    action     = "allow"
+    cidr_block = aws_vpc.secure_vpc.cidr_block
+    from_port  = 0
+    to_port    = 0
+  }
 
   tags = {
     Name = "Private NACL"

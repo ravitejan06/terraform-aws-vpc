@@ -72,6 +72,13 @@ resource "aws_security_group" "bastion_sg" {
     protocol         = "tcp"
     cidr_blocks      = [var.web_pvtsub1, var.web_pvtsub2]
   }
+  egress {
+    description      = "To download packages"
+    from_port        = 443
+    to_port          = 443
+    protocol         = "tcp"
+    cidr_blocks      = [var.open_cidr]
+  }
 }
 #8 Create a Bastion host Instance
 resource "aws_instance" "bastion_ec2" {
